@@ -20,9 +20,13 @@ public class SwarmManager : MonoBehaviour
         GenerateSwarm(SwarmOrigin.SpawnRadius, SwarmOrigin.transform.position);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         CalculateSwarmPoperties();
+    }
+
+    private void Update()
+    {
         SwarmMovement(Time.deltaTime);
     }
 
@@ -81,6 +85,7 @@ public class SwarmManager : MonoBehaviour
         int alignCounter = 0;
         int collisionCounter = 0;   
         float distance;
+        bool envCollision = false;
 
         foreach (Agent other in Swarm)
         {
@@ -93,7 +98,7 @@ public class SwarmManager : MonoBehaviour
                 flockingDirection += agent.position;
             }
 
-            if (alignCounter < SwarmSettings.MaxAlignInputs && distance < SwarmSettings.AlignRange))
+            if (alignCounter < SwarmSettings.MaxAlignInputs && distance < SwarmSettings.AlignRange)
             {
                 alignCounter++;
                 alignDirection += other.prevVelocity;
@@ -101,44 +106,52 @@ public class SwarmManager : MonoBehaviour
 
             if (collisionCounter < SwarmSettings.MaxCollisionInputs && distance < SwarmSettings.CollisionRange)
             {
-                collisionDirection = -(other.position - agent.position).normalized;
+                collisionCounter ++;
+                collisionDirection += (other.position - agent.position).normalized;
             }
         }
 
-
-        foreach (Agent other in Swarm)
+        if (IsObstacleCollisionRay(agent, out RaycastHit hitInfo))
         {
-            if (agent.id == other.id) continue;
-            if (IsInCollisionRange(agent, other))
-            {
-                collisionDirection = - (other.position - agent.position).normalized;
-                break;
-            }
+            avoidObstacleDirection = (hitInfo.point - agent.position).normalized;
+            envCollision = true;
         }
 
-        if (IsObstacleCollision(agent, out RaycastHit hitInfo))
-        {
-            avoidObstacleDirection = (hitInfo.collider.transform.position - agent.position).normalized;
-        }
 
-        if (SwarmTarget != null && IsInTargetRange(agent))
-        {
-            targetDirection = (SwarmTarget.transform.position - agent.position).normalized;    
-        }
+        targetDirection = (SwarmTarget.transform.position - agent.position).normalized;    
+        
 
         flockingCounter = Mathf.Max(1, flockingCounter);
-        alignCounter = Mathf.Max(1, alignCounter);
-        collisionCounter = Mathf.Max(1, collisionCounter);  
+        //alignCounter = Mathf.Max(1, alignCounter);
+        //collisionCounter = Mathf.Max(1, collisionCounter);  
 
         flockingDirection = ((flockingDirection / flockingCounter) - agent.position).normalized;
-        alignDirection = (alignDirection / alignCounter).normalized;
-        collisionDirection = (collisionDirection / alignCounter).   
+        alignDirection = alignDirection.normalized;
+        //collisionDirection = (collisionDirection / collisionCounter).normalized;
+
+        /*        if (envCollision)
+                {
+                    Debug.Log("env collision");
+                    agent.velocity = - avoidObstacleDirection;
+                }
+                else if (collisionCounter > 0) 
+                {
+                    agent.velocity = - collisionDirection.normalized;
+                }
+                else
+                {
+                    agent.velocity = flockingDirection * SwarmSettings.FlockingImpact
+                                   + alignDirection * SwarmSettings.AlighImpact
+                                   + targetDirection * SwarmSettings.TargetImpact;
+                    agent.velocity.Normalize();
+                }*/
 
 
-        newVelocity = flockingDirection * SwarmSettings.FlockingImpact 
-                    + alignDirection * SwarmSettings.AlighImpact 
-                    + collisionDirection * SwarmSettings.CollisionImpact
-                    + avoidObstacleDirection * SwarmSettings.ObstacleImpact 
+
+        newVelocity = flockingDirection * SwarmSettings.FlockingImpact
+                    + alignDirection * SwarmSettings.AlighImpact
+                    - collisionDirection * SwarmSettings.CollisionImpact
+                    - avoidObstacleDirection * SwarmSettings.ObstacleImpact
                     + targetDirection * SwarmSettings.TargetImpact;
 
 
@@ -146,32 +159,7 @@ public class SwarmManager : MonoBehaviour
 
     }
 
-    private bool IsInFlockingRange(Agent agent, Agent other)
-    {
-        return AgentComparer(agent, other, SwarmSettings.FlockingRange);
-    }
-
-    private bool IsInAlignRange(Agent agent, Agent other)
-    {
-        return AgentComparer(agent, other, SwarmSettings.AlignRange);
-    }
-
-    private bool IsInCollisionRange(Agent agent, Agent other)
-    {
-        return AgentComparer(agent, other, SwarmSettings.CollisionRange);
-    }
-
-    private bool IsInTargetRange(Agent agent)
-    {
-        return Vector3.Distance(agent.position, SwarmTarget.transform.position) < SwarmSettings.TargetRange;
-    }
-
-    private bool AgentComparer( Agent agent, Agent other, float criterion)
-    {
-        return Vector3.Distance(agent.position, other.position) < criterion;
-    }
-
-    private bool IsObstacleCollision(Agent agent, out RaycastHit hitInfo)
+    private bool IsObstacleCollisionSphere(Agent agent, out RaycastHit hitInfo)
     {
         return Physics.SphereCast(agent.position, 
                                   agent.radius, 
@@ -179,5 +167,14 @@ public class SwarmManager : MonoBehaviour
                                   out hitInfo, 
                                   SwarmSettings.DetectionRange, 
                                   ObstaclesMask);
+    }
+
+    private bool IsObstacleCollisionRay(Agent agent, out RaycastHit hitInfo)
+    {
+        return Physics.Raycast(agent.position,
+                          agent.prevVelocity,
+                          out hitInfo,
+                          SwarmSettings.DetectionRange,
+                          ObstaclesMask);
     }
 }

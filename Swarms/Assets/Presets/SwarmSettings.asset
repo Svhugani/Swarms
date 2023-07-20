@@ -13,18 +13,20 @@ MonoBehaviour:
   m_Name: SwarmSettings
   m_EditorClassIdentifier: 
   <SwarmSize>k__BackingField: 50
-  <TimeScale>k__BackingField: 3.6
-  <MinAcceleration>k__BackingField: 1
-  <MaxAcceleration>k__BackingField: 2
+  <TimeScale>k__BackingField: 2
+  <MinAcceleration>k__BackingField: 3
+  <MaxAcceleration>k__BackingField: 3
   <MinSpeed>k__BackingField: 1
   <MaxSpeed>k__BackingField: 2
-  <FlockingImpact>k__BackingField: 3
-  <AlighImpact>k__BackingField: 1
-  <CollisionImpact>k__BackingField: 3
-  <TargetImpact>k__BackingField: 2
-  <ObstacleImpact>k__BackingField: 5
+  <FlockingImpact>k__BackingField: 1.1
+  <AlighImpact>k__BackingField: 3.5
+  <CollisionImpact>k__BackingField: 5.4
+  <TargetImpact>k__BackingField: 0.7
+  <ObstacleImpact>k__BackingField: 10
   <FlockingRange>k__BackingField: 15
-  <AlignRange>k__BackingField: 4
+  <AlignRange>k__BackingField: 1
   <CollisionRange>k__BackingField: 1
-  <TargetRange>k__BackingField: 100
-  <DetectionRange>k__BackingField: 1
+  <DetectionRange>k__BackingField: 4
+  <MaxFlockingInputs>k__BackingField: 10
+  <MaxAlignInputs>k__BackingField: 10
+  <MaxCollisionInputs>k__BackingField: 5

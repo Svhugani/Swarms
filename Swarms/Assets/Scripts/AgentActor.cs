@@ -12,8 +12,11 @@ public class AgentActor : MonoBehaviour
     public void UpdateMovement(float timeDelta)
     {
         Agent.prevVelocity = Agent.velocity;
-        transform.forward = Vector3.Slerp(transform.forward, Agent.velocity, timeDelta * Agent.acceleration);    
-        transform.position += transform.forward * Agent.speed * timeDelta;
+        float speedMod = Vector3.Dot(transform.forward, Agent.velocity);
+        speedMod = Mathf.Clamp(speedMod, .5f, 1f);
+        transform.forward = Vector3.Slerp(transform.forward, Agent.velocity, timeDelta * Agent.acceleration * speedMod);    
+        
+        transform.position += transform.forward * Agent.speed * speedMod * timeDelta;
         Agent.position = transform.position;
     }
 
