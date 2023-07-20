@@ -14,7 +14,7 @@ public class AgentActor : MonoBehaviour
         Agent.prevVelocity = Agent.velocity;
         float speedMod = Vector3.Dot(transform.forward, Agent.velocity);
         speedMod = Mathf.Clamp(speedMod, .5f, 1f);
-        transform.forward = Vector3.Slerp(transform.forward, Agent.velocity, timeDelta * Agent.acceleration * speedMod);    
+        transform.forward = Vector3.Slerp(transform.forward, Agent.velocity, timeDelta * Agent.acceleration);    
         
         transform.position += transform.forward * Agent.speed * speedMod * timeDelta;
         Agent.position = transform.position;
