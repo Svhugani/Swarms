@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwarmManager : MonoBehaviour
+public class SwarmManager : AbstractManager
 {
     [field: SerializeField] public SwarmSettings SwarmSettings { get; private set; }
     [field: SerializeField] public AgentActor AgentActorPrefab { get; private set; }
@@ -51,10 +51,8 @@ public class SwarmManager : MonoBehaviour
             Swarm.Add(agent);
             AgentActors.Add(agentActor);
 
-
         }
     }
-
 
     public void CalculateSwarmPoperties()
     {
@@ -85,7 +83,6 @@ public class SwarmManager : MonoBehaviour
         int alignCounter = 0;
         int collisionCounter = 0;   
         float distance;
-        bool envCollision = false;
 
         foreach (Agent other in Swarm)
         {
@@ -114,38 +111,14 @@ public class SwarmManager : MonoBehaviour
         if (IsObstacleCollisionRay(agent, out RaycastHit hitInfo))
         {
             avoidObstacleDirection = (hitInfo.point - agent.position).normalized;
-            envCollision = true;
         }
 
 
         targetDirection = (SwarmTarget.transform.position - agent.position).normalized;    
         
-
         flockingCounter = Mathf.Max(1, flockingCounter);
-        //alignCounter = Mathf.Max(1, alignCounter);
-        //collisionCounter = Mathf.Max(1, collisionCounter);  
-
         flockingDirection = ((flockingDirection / flockingCounter) - agent.position).normalized;
         alignDirection = alignDirection.normalized;
-        //collisionDirection = (collisionDirection / collisionCounter).normalized;
-
-        /*        if (envCollision)
-                {
-                    Debug.Log("env collision");
-                    agent.velocity = - avoidObstacleDirection;
-                }
-                else if (collisionCounter > 0) 
-                {
-                    agent.velocity = - collisionDirection.normalized;
-                }
-                else
-                {
-                    agent.velocity = flockingDirection * SwarmSettings.FlockingImpact
-                                   + alignDirection * SwarmSettings.AlighImpact
-                                   + targetDirection * SwarmSettings.TargetImpact;
-                    agent.velocity.Normalize();
-                }*/
-
 
 
         newVelocity = flockingDirection * SwarmSettings.FlockingImpact
@@ -157,16 +130,6 @@ public class SwarmManager : MonoBehaviour
 
         agent.velocity = newVelocity.normalized;
 
-    }
-
-    private bool IsObstacleCollisionSphere(Agent agent, out RaycastHit hitInfo)
-    {
-        return Physics.SphereCast(agent.position, 
-                                  agent.radius, 
-                                  agent.prevVelocity, 
-                                  out hitInfo, 
-                                  SwarmSettings.DetectionRange, 
-                                  ObstaclesMask);
     }
 
     private bool IsObstacleCollisionRay(Agent agent, out RaycastHit hitInfo)
