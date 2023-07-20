@@ -10,16 +10,25 @@ public class FirstPersonDOF : MonoBehaviour
     private float _currentDistance;
     private void Update()
     {
-        if (!DetectObjects(out RaycastHit hitInfo)) return;
+        if (!DetectObjectsRay(out RaycastHit hitInfo)) return;
         _currentDistance = Mathf.Lerp(_currentDistance, hitInfo.distance, Time.deltaTime * FocusChangeSpeed);
         AppManager.Instance.PostProcessManager.SetFocusDistance(_currentDistance);
         Debug.Log("Distance: " +  _currentDistance);    
     }
 
-    private bool DetectObjects(out RaycastHit hitInfo)
+    private bool DetectObjectsSphere(out RaycastHit hitInfo)
     {
         return Physics.SphereCast(transform.position,
                                   VisionRadius,
+                                  transform.forward,
+                                  out hitInfo,
+                                  VisionRange
+                                  );
+    }
+
+    private bool DetectObjectsRay(out RaycastHit hitInfo)
+    {
+        return Physics.Raycast(transform.position,
                                   transform.forward,
                                   out hitInfo,
                                   VisionRange

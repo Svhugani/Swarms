@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb90cb9a1359f16409c296c7f22d3ecd, type: 3}
   m_Name: SwarmSettings
   m_EditorClassIdentifier: 
-  <SwarmSize>k__BackingField: 30
-  <TimeScale>k__BackingField: 3
+  <SwarmSize>k__BackingField: 50
+  <TimeScale>k__BackingField: 2
   <MinAcceleration>k__BackingField: 1
-  <MaxAcceleration>k__BackingField: 1
+  <MaxAcceleration>k__BackingField: 2
   <MinSpeed>k__BackingField: 1
-  <MaxSpeed>k__BackingField: 1
+  <MaxSpeed>k__BackingField: 2
   <FlockingImpact>k__BackingField: 1.7
-  <AlighImpact>k__BackingField: 1.9
-  <CollisionImpact>k__BackingField: 6.2
+  <AlighImpact>k__BackingField: 1.3
+  <CollisionImpact>k__BackingField: 5.4
   <TargetImpact>k__BackingField: 2.7
   <ObstacleImpact>k__BackingField: 10
   <FlockingRange>k__BackingField: 10
@@ -30,6 +30,6 @@ MonoBehaviour:
   <MaxFlockingInputs>k__BackingField: 10
   <MaxAlignInputs>k__BackingField: 10
   <MaxCollisionInputs>k__BackingField: 10
-  <DisturbanceImpact>k__BackingField: 0.4
-  <DisturbanceFrequency_A>k__BackingField: 1
-  <DisturbanceFrequency_B>k__BackingField: 1.4
+  <DisturbanceImpact>k__BackingField: 2
+  <DisturbanceFrequency_A>k__BackingField: 2.8
+  <DisturbanceFrequency_B>k__BackingField: -1

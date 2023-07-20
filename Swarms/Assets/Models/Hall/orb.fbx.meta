@@ -3,7 +3,17 @@ guid: 4267332b93765004db51ea8d20c79d08
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Orb
+    second: {fileID: 2100000, guid: 0fd0dbf981ee0214c80b3ea4300bb882, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Totems
+    second: {fileID: 2100000, guid: 367ec5f869ba1cf4eb6c9b66a25815ae, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

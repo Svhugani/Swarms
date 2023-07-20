@@ -139,6 +139,7 @@ MonoBehaviour:
     acceleration: 0
     speed: 0
     radius: 0
+    phase: 0
 --- !u!135 &3699259702958588971
 SphereCollider:
   m_ObjectHideFlags: 0

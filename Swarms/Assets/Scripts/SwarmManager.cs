@@ -124,11 +124,11 @@ public class SwarmManager : AbstractManager
         flockingDirection = ((flockingDirection / flockingCounter) - agent.position).normalized;
         alignDirection = alignDirection.normalized;
 
-        float sin_a = Mathf.Sin(SwarmSettings.DisturbanceFrequency_A * _timer + agent.phase);
+/*        float sin_a = Mathf.Sin(SwarmSettings.DisturbanceFrequency_A * _timer + agent.phase);
         float sin_b = Mathf.Sin(SwarmSettings.DisturbanceFrequency_B * _timer + agent.phase);
         float cos_a = Mathf.Cos(SwarmSettings.DisturbanceFrequency_A * _timer + agent.phase);
         float cos_b = Mathf.Cos(SwarmSettings.DisturbanceFrequency_B * _timer + agent.phase);
-        disturbanceDirection = new Vector3(sin_a * cos_b, sin_a * sin_b, cos_a);
+        disturbanceDirection = new Vector3(sin_a * cos_b, sin_a * sin_b, cos_a);*/
 
         newVelocity = flockingDirection * SwarmSettings.FlockingImpact
                     + alignDirection * SwarmSettings.AlighImpact
