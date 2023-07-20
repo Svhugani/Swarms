@@ -23,5 +23,7 @@ public class SwarmSettings : ScriptableObject
     [field: SerializeField] public int MaxFlockingInputs { get; private set; } = 5;
     [field: SerializeField] public int MaxAlignInputs { get; private set; } = 5;
     [field: SerializeField] public int MaxCollisionInputs { get; private set; } = 5;
-
+    [field: SerializeField, Range(-10f, 10f)] public float DisturbanceImpact { get; private set; } = 0;
+    [field: SerializeField, Range(-10f, 10f)] public float DisturbanceFrequency_A { get; private set; } = 1f;
+    [field: SerializeField, Range(-10f, 10f)] public float DisturbanceFrequency_B { get; private set; } = 1f;
 }

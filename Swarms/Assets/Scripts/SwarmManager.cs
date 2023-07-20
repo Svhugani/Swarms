@@ -12,12 +12,13 @@ public class SwarmManager : AbstractManager
     [field: SerializeField] public LayerMask ObstaclesMask { get; private set; }    
     public List<AgentActor> AgentActors { get; private set; } = new List<AgentActor>();
     public List<Agent> Swarm { get; private set; } = new List<Agent>();
-
+    private float _timer;
 
 
     private void Start()
     {
         GenerateSwarm(SwarmOrigin.SpawnRadius, SwarmOrigin.transform.position);
+        _timer = 0;
     }
 
     private void FixedUpdate()
@@ -28,6 +29,7 @@ public class SwarmManager : AbstractManager
     private void Update()
     {
         SwarmMovement(Time.deltaTime);
+        _timer += Time.deltaTime;   
     }
 
 
@@ -43,7 +45,8 @@ public class SwarmManager : AbstractManager
             Vector3 velocity = Random.onUnitSphere;
             float acceleration = Random.Range(SwarmSettings.MinAcceleration, SwarmSettings.MaxAcceleration);
             float speed = Random.Range(SwarmSettings.MinSpeed, SwarmSettings.MaxSpeed);
-            Agent agent = new Agent(i, velocity, position, acceleration, agentActor.Collider.radius, speed);
+            float phase = Random.Range(0, 2 * Mathf.PI);
+            Agent agent = new Agent(i, velocity, position, acceleration, agentActor.Collider.radius, speed, phase);
 
             agentActor.Agent = agent;
             agentActor.transform.position = position;   
@@ -78,6 +81,7 @@ public class SwarmManager : AbstractManager
         Vector3 collisionDirection = Vector3.zero;
         Vector3 targetDirection = Vector3.zero;
         Vector3 avoidObstacleDirection = Vector3.zero;
+        Vector3 disturbanceDirection = Vector3.zero;
 
         int flockingCounter = 0;
         int alignCounter = 0;
@@ -120,12 +124,18 @@ public class SwarmManager : AbstractManager
         flockingDirection = ((flockingDirection / flockingCounter) - agent.position).normalized;
         alignDirection = alignDirection.normalized;
 
+        float sin_a = Mathf.Sin(SwarmSettings.DisturbanceFrequency_A * _timer + agent.phase);
+        float sin_b = Mathf.Sin(SwarmSettings.DisturbanceFrequency_B * _timer + agent.phase);
+        float cos_a = Mathf.Cos(SwarmSettings.DisturbanceFrequency_A * _timer + agent.phase);
+        float cos_b = Mathf.Cos(SwarmSettings.DisturbanceFrequency_B * _timer + agent.phase);
+        disturbanceDirection = new Vector3(sin_a * cos_b, sin_a * sin_b, cos_a);
 
         newVelocity = flockingDirection * SwarmSettings.FlockingImpact
                     + alignDirection * SwarmSettings.AlighImpact
                     - collisionDirection * SwarmSettings.CollisionImpact
                     - avoidObstacleDirection * SwarmSettings.ObstacleImpact
-                    + targetDirection * SwarmSettings.TargetImpact;
+                    + targetDirection * SwarmSettings.TargetImpact
+                    + disturbanceDirection * SwarmSettings.DisturbanceImpact;
 
 
         agent.velocity = newVelocity.normalized;

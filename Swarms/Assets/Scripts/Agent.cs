@@ -10,8 +10,9 @@ public class Agent
     public float acceleration;
     public float speed;
     public float radius;
+    public float phase;
 
-    public Agent(int id, Vector3 velocity, Vector3 position, float acceleration, float radius, float speed)
+    public Agent(int id, Vector3 velocity, Vector3 position, float acceleration, float radius, float speed, float phase)
     {
         this.id = id;
         this.velocity = velocity; 
@@ -20,6 +21,7 @@ public class Agent
         this.acceleration = acceleration;
         this.radius = radius;   
         this.speed = speed;
+        this.phase = phase;
     }
 
 }

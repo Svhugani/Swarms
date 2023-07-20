@@ -30,13 +30,13 @@ MonoBehaviour:
     m_Value: 0
   focusDistance:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 3.97
   aperture:
     m_OverrideState: 1
-    m_Value: 5.6
+    m_Value: 3.4
   focalLength:
     m_OverrideState: 1
-    m_Value: 204
+    m_Value: 124
   bladeCount:
     m_OverrideState: 0
     m_Value: 5
@@ -67,10 +67,10 @@ MonoBehaviour:
     m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 7.85
+    m_Value: 4
   scatter:
-    m_OverrideState: 0
-    m_Value: 0.7
+    m_OverrideState: 1
+    m_Value: 0.755
   clamp:
     m_OverrideState: 0
     m_Value: 65472
@@ -140,6 +140,7 @@ MonoBehaviour:
   - {fileID: 7592644196061947732}
   - {fileID: -8326689482238009379}
   - {fileID: 8432237085558706024}
+  - {fileID: 2792691749460299415}
 --- !u!114 &849379129802519247
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -180,6 +181,25 @@ MonoBehaviour:
   maxNits:
     m_OverrideState: 0
     m_Value: 1000
+--- !u!114 &2792691749460299415
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221518ef91623a7438a71fef23660601, type: 3}
+  m_Name: WhiteBalance
+  m_EditorClassIdentifier: 
+  active: 1
+  temperature:
+    m_OverrideState: 1
+    m_Value: 31
+  tint:
+    m_OverrideState: 0
+    m_Value: 0
 --- !u!114 &7592644196061947732
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -197,14 +217,14 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   quality:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
   intensity:
     m_OverrideState: 1
     m_Value: 1
   clamp:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.12
 --- !u!114 &8432237085558706024
 MonoBehaviour:
   m_ObjectHideFlags: 3

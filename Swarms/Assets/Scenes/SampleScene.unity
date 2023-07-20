@@ -143,8 +143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0609098e743871f47bf0bd6e567a0ed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <VisionRadius>k__BackingField: 1
-  <VisionRange>k__BackingField: 100
+  <VisionRadius>k__BackingField: 0.1
+  <VisionRange>k__BackingField: 200
+  <FocusChangeSpeed>k__BackingField: 3
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

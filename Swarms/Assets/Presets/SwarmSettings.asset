@@ -30,3 +30,6 @@ MonoBehaviour:
   <MaxFlockingInputs>k__BackingField: 10
   <MaxAlignInputs>k__BackingField: 10
   <MaxCollisionInputs>k__BackingField: 10
+  <DisturbanceImpact>k__BackingField: 0.4
+  <DisturbanceFrequency_A>k__BackingField: 1
+  <DisturbanceFrequency_B>k__BackingField: 1.4
