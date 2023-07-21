@@ -69,7 +69,7 @@ public class SwarmManager : AbstractManager
     {
         foreach (AgentActor agentActor in AgentActors)
         {
-            agentActor.UpdateMovement(timeDelta * SwarmSettings.TimeScale);   
+            agentActor.UpdateMovement(timeDelta * SwarmSettings.TimeScaleRuntime);   
         }
     }
 
@@ -81,7 +81,6 @@ public class SwarmManager : AbstractManager
         Vector3 collisionDirection = Vector3.zero;
         Vector3 targetDirection = Vector3.zero;
         Vector3 avoidObstacleDirection = Vector3.zero;
-        Vector3 disturbanceDirection = Vector3.zero;
 
         int flockingCounter = 0;
         int alignCounter = 0;
@@ -122,19 +121,15 @@ public class SwarmManager : AbstractManager
             targetDirection = (Manager.TargetManager.GetTargetPosition() - agent.position).normalized;
         }
         
-        
         flockingCounter = Mathf.Max(1, flockingCounter);
         flockingDirection = ((flockingDirection / flockingCounter) - agent.position).normalized;
         alignDirection = alignDirection.normalized;
 
-
-        newVelocity = flockingDirection * SwarmSettings.FlockingImpact
-                    + alignDirection * SwarmSettings.AlighImpact
-                    - collisionDirection * SwarmSettings.CollisionImpact
-                    - avoidObstacleDirection * SwarmSettings.ObstacleImpact
-                    + targetDirection * SwarmSettings.TargetImpact
-                    + disturbanceDirection * SwarmSettings.DisturbanceImpact;
-
+        newVelocity = flockingDirection * SwarmSettings.FlockingImpactRuntime
+                    + alignDirection * SwarmSettings.AlignImpactRuntime
+                    - collisionDirection * SwarmSettings.CollisionImpactRuntime
+                    - avoidObstacleDirection * SwarmSettings.ObstacleImpactRuntime
+                    + targetDirection * SwarmSettings.TargetImpactRuntime;
 
         agent.velocity = newVelocity.normalized;
 

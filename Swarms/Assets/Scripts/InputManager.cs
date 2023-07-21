@@ -5,10 +5,17 @@ using UnityEngine.InputSystem;
 
 public class InputManager : AbstractManager
 {
+    public delegate void MouseScrollHandler(float delta);
+    public event MouseScrollHandler OnMouseScroll;
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.mouseScrollDelta.y != 0)
+        {
+            OnMouseScroll?.Invoke(Input.mouseScrollDelta.y);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Manager.TargetManager.Activate();
             Manager.TargetManager.SnapToPlayer();
@@ -24,5 +31,7 @@ public class InputManager : AbstractManager
         {
             Manager.TargetManager.Deactivate();
         }
+
+
     }
 }
