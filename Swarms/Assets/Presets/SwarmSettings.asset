@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb90cb9a1359f16409c296c7f22d3ecd, type: 3}
   m_Name: SwarmSettings
   m_EditorClassIdentifier: 
-  <SwarmSize>k__BackingField: 50
-  <TimeScale>k__BackingField: 2
+  <SwarmSize>k__BackingField: 100
+  <TimeScale>k__BackingField: 0.22
   <MinAcceleration>k__BackingField: 1
   <MaxAcceleration>k__BackingField: 2
   <MinSpeed>k__BackingField: 1
@@ -23,7 +23,7 @@ MonoBehaviour:
   <CollisionImpact>k__BackingField: 5.4
   <TargetImpact>k__BackingField: 2.7
   <ObstacleImpact>k__BackingField: 10
-  <FlockingRange>k__BackingField: 10
+  <FlockingRange>k__BackingField: 1
   <AlignRange>k__BackingField: 1
   <CollisionRange>k__BackingField: 0.2
   <DetectionRange>k__BackingField: 0.5
