@@ -9,6 +9,8 @@ public class AppManager : AbstractManager
 
     [field: SerializeField] public SwarmManager SwarmManager { get; private set; }
     [field: SerializeField] public PostProcessManager PostProcessManager { get; private set; }
+    [field: SerializeField] public InputManager InputManager { get; private set; }
+    [field: SerializeField] public TargetManager TargetManager { get; private set; }
 
     private AbstractManager[] _managers;
 
@@ -23,7 +25,7 @@ public class AppManager : AbstractManager
 
     private void Start()
     {
-        _managers = new AbstractManager[] { SwarmManager, PostProcessManager };
+        _managers = new AbstractManager[] { SwarmManager, PostProcessManager, InputManager, TargetManager };
         _ = Prepare();
     }
 
@@ -31,14 +33,13 @@ public class AppManager : AbstractManager
     {
         IsBusy = true;
         List<Task> tasks = new List<Task>();
-        Debug.Log("Start prepare");
+
         foreach (var manager in _managers) 
         {
             tasks.Add(manager.Prepare());
         }
 
         await Task.WhenAll(tasks);
-        Debug.Log("Prepared");
         IsBusy = false;
     }
 

@@ -117,8 +117,11 @@ public class SwarmManager : AbstractManager
             avoidObstacleDirection = (hitInfo.point - agent.position).normalized;
         }
 
-
-        targetDirection = (SwarmTarget.transform.position - agent.position).normalized;    
+        if(Manager.TargetManager.IsActive())
+        {
+            targetDirection = (Manager.TargetManager.GetTargetPosition() - agent.position).normalized;
+        }
+        
         
         flockingCounter = Mathf.Max(1, flockingCounter);
         flockingDirection = ((flockingDirection / flockingCounter) - agent.position).normalized;
