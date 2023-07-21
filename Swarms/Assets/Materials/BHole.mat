@@ -38,12 +38,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Distortion: 3.43
-    - _HoleSize: 0.734
+    - _Distortion: 2.32
+    - _HoleSize: 0.723
     - _MinOpacity: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 0.0434
+    - _Smoothness: 0.05
     - _StreetchSpeed: 20
     - _StretchAmount: 0.2
     m_Colors: []
