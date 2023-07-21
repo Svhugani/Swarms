@@ -90,7 +90,7 @@ public class SwarmManager : AbstractManager
 
         foreach (Agent other in Swarm)
         {
-            distance = Vector3.Distance(agent.position, other.position);
+            distance = L2_Distance(agent.position, other.position);
 
             if (agent.id == other.id) continue;
             if (flockingCounter < SwarmSettings.MaxFlockingInputs && distance < SwarmSettings.FlockingRange)
@@ -127,11 +127,6 @@ public class SwarmManager : AbstractManager
         flockingDirection = ((flockingDirection / flockingCounter) - agent.position).normalized;
         alignDirection = alignDirection.normalized;
 
-/*        float sin_a = Mathf.Sin(SwarmSettings.DisturbanceFrequency_A * _timer + agent.phase);
-        float sin_b = Mathf.Sin(SwarmSettings.DisturbanceFrequency_B * _timer + agent.phase);
-        float cos_a = Mathf.Cos(SwarmSettings.DisturbanceFrequency_A * _timer + agent.phase);
-        float cos_b = Mathf.Cos(SwarmSettings.DisturbanceFrequency_B * _timer + agent.phase);
-        disturbanceDirection = new Vector3(sin_a * cos_b, sin_a * sin_b, cos_a);*/
 
         newVelocity = flockingDirection * SwarmSettings.FlockingImpact
                     + alignDirection * SwarmSettings.AlighImpact
@@ -153,4 +148,16 @@ public class SwarmManager : AbstractManager
                           SwarmSettings.DetectionRange,
                           ObstaclesMask);
     }
+
+    private float L2_Distance(Vector3 a, Vector3 b)
+    {
+        return Vector3.Distance(a, b);
+    }
+
+    private float LINF_Distance(Vector3 a, Vector3 b)
+    {
+        Vector3 absDiff = new Vector3(Mathf.Abs(a.x - b.x), Mathf.Abs(a.y - b.y), Mathf.Abs (a.z - b.z));   
+        return Mathf.Max(Mathf.Max(absDiff.x, absDiff.y), absDiff.z);
+    }
+
 }

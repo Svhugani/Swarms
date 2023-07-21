@@ -64,7 +64,7 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.71
+    m_Value: 0.6
   intensity:
     m_OverrideState: 1
     m_Value: 10
@@ -72,8 +72,8 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0.755
   clamp:
-    m_OverrideState: 0
-    m_Value: 65472
+    m_OverrideState: 1
+    m_Value: 1
   tint:
     m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -134,53 +134,12 @@ MonoBehaviour:
   m_Name: SampleSceneProfile
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 849379129802519247}
   - {fileID: -7893295128165547882}
   - {fileID: -7011558710299706105}
   - {fileID: 7592644196061947732}
   - {fileID: -8326689482238009379}
   - {fileID: 8432237085558706024}
   - {fileID: 2792691749460299415}
---- !u!114 &849379129802519247
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
-  m_Name: Tonemapping
-  m_EditorClassIdentifier: 
-  active: 1
-  mode:
-    m_OverrideState: 1
-    m_Value: 1
-  neutralHDRRangeReductionMode:
-    m_OverrideState: 0
-    m_Value: 2
-  acesPreset:
-    m_OverrideState: 0
-    m_Value: 3
-  hueShiftAmount:
-    m_OverrideState: 0
-    m_Value: 0
-  detectPaperWhite:
-    m_OverrideState: 0
-    m_Value: 0
-  paperWhite:
-    m_OverrideState: 0
-    m_Value: 300
-  detectBrightnessLimits:
-    m_OverrideState: 0
-    m_Value: 1
-  minNits:
-    m_OverrideState: 0
-    m_Value: 0.005
-  maxNits:
-    m_OverrideState: 0
-    m_Value: 1000
 --- !u!114 &2792691749460299415
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -224,7 +183,7 @@ MonoBehaviour:
     m_Value: 1
   clamp:
     m_OverrideState: 1
-    m_Value: 0.12
+    m_Value: 0.2
 --- !u!114 &8432237085558706024
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -240,7 +199,7 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.6879424, y: 0.8670631, z: 1, w: -0.03770028}
+    m_Value: {x: 0.48798633, y: 0.75314796, z: 1, w: -0.03770028}
   midtones:
     m_OverrideState: 1
     m_Value: {x: 0.9561876, y: 1, z: 0.8495387, w: 0}
